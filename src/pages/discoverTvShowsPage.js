@@ -2,11 +2,11 @@ import React from "react";
 import PageTemplate from "../components/tvshows/templateTvShowListPage";
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
-import {getTvShows} from '../api/tmdb-api';
+import {discover} from '../api/tmdb-api';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites';
 
 const DiscoverTvShowsPage = (props) => {
-    const { data, error, isLoading, isError }  = useQuery('discovertv', getTvShows)
+    const { data, error, isLoading, isError }  = useQuery(['discovertv', "tv"], discover)
 
     if (isLoading) return <Spinner />
     if (isError) return <h1>{error.message}</h1>

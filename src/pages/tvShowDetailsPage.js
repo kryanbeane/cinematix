@@ -1,18 +1,14 @@
 import React from "react";
 import TvShowDetails from "../components/tvshows/tvShowDetails";
 import PageTemplate from "../components/tvshows/templateTvShowPage";
-import {getTvShow} from '../api/tmdb-api';
+import {getItem} from '../api/tmdb-api';
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner';
 import { withRouter } from "react-router-dom";
 
 const TvShowDetailsPage = (props) => {
     const { id } = props.match.params
-
-    const { data: tvshow, error, isLoading, isError } = useQuery(
-        ["show", { id: id }],
-        getTvShow
-    );
+    const { data: tvshow, error, isLoading, isError } = useQuery(["show", { id: id }, "tv"], getItem);
 
     if (isLoading) {
         return <Spinner />;

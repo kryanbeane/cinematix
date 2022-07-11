@@ -1,9 +1,10 @@
 export const API_URL="https://api.themoviedb.org/3";
 export const API_KEY=process.env.REACT_APP_TMDB_KEY;
 
-export const getMovies = async () => {
+export const discover = async ({ queryKey }) => {
+  const [, type] = queryKey;
   return fetch(
-    `${API_URL}/discover/movie?api_key=${API_KEY}`
+    `${API_URL}/discover/${type}?api_key=${API_KEY}`
   ).then((response) => {
     if (!response.ok) {
       throw new Error(response.json().message);
@@ -11,49 +12,6 @@ export const getMovies = async () => {
     return response.json();
   }).catch((error) => {
      throw error
-  });
-};
-
-export const getMovie = async (args) => {
-  const [, idPart] = args.queryKey;
-  const { id } = idPart;
-  return fetch(
-    `${API_URL}/movie/${id}?api_key=${API_KEY}`
-  ).then((response) => {
-    if (!response.ok) {
-      throw new Error(response.json().message);
-    }
-    return response.json();
-  }).catch((error) => {
-    throw error
- });
-};
-
-export const getTvShows = async () => {
-  return fetch(
-      `${API_URL}/discover/tv?api_key=${API_KEY}`
-  ).then((response) => {
-    if (!response.ok) {
-      throw new Error(response.json().message);
-    }
-    return response.json();
-  }).catch((error) => {
-    throw error
-  });
-};
-
-export const getTvShow = async (args) => {
-  const [, idPart] = args.queryKey;
-  const { id } = idPart;
-  return fetch(
-      `${API_URL}/tv/${id}?api_key=${API_KEY}`
-  ).then((response) => {
-    if (!response.ok) {
-      throw new Error(response.json().message);
-    }
-    return response.json();
-  }).catch((error) => {
-    throw error
   });
 };
 
@@ -70,11 +28,11 @@ export const getActors = async () => {
   });
 };
 
-export const getActor = (args) => {
-  const [, idPart] = args.queryKey;
+export const getItem = async ({ queryKey }) => {
+  const [, idPart, type] = queryKey;
   const { id } = idPart;
   return fetch(
-      `${API_URL}/person/${id}?api_key=${API_KEY}`
+      `${API_URL}/${type}/${id}?api_key=${API_KEY}`
   ).then((response) => {
     if (!response.ok) {
       throw new Error(response.json().message);
@@ -100,9 +58,10 @@ export const getMovieCredits = async (args) => {
   });
 };
 
-export const getMovieGenres = async () => {
+export const getGenres = async ({ queryKey }) => {
+  const [, type] = queryKey;
   return fetch(
-    `${API_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`
+    `${API_URL}/genre/${type}/list?api_key=${API_KEY}&language=en-US`
   ).then( (response) => {
     if (!response.ok) {
       throw new Error(response.json().message);
@@ -111,19 +70,6 @@ export const getMovieGenres = async () => {
   }).catch((error) => {
     throw error
  });
-};
-
-export const getTvShowGenres = async () => {
-  return fetch(
-      `${API_URL}/genre/tv/list?api_key=${API_KEY}&language=en-US`
-  ).then( (response) => {
-    if (!response.ok) {
-      throw new Error(response.json().message);
-    }
-    return response.json();
-  }).catch((error) => {
-    throw error
-  });
 };
 
 export const getImages = async ({ queryKey }) => {
@@ -142,17 +88,17 @@ export const getImages = async ({ queryKey }) => {
 };
 
 export const getMovieReviews = async (id) => {
-    return fetch(
+  return fetch(
       `${API_URL}/movie/${id}/reviews?api_key=${API_KEY}`
-      ).then( (response) => {
-        if (!response.ok) {
-          throw new Error(response.json().message);
-        }
-        return response.json();
-      }).catch((error) => {
-        throw error
-     });
-  };
+  ).then( (response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  }).catch((error) => {
+    throw error
+  });
+}
 
 export const getTvShowReviews = async (id) => {
   return fetch(

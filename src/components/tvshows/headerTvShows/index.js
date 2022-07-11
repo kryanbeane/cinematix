@@ -30,7 +30,7 @@ const TvShowHeader = ({ tvshow, history}) => {
       </IconButton>
 
       <Typography variant="h4" component="h3">
-        {tvshow.title}
+        {tvshow.name}
         <br />
         <span className={classes.tagLine}>{`${tvshow.tagline}`} </span>
       </Typography>
