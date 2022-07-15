@@ -12,7 +12,6 @@ const useStyles = makeStyles({
 });
 
 export default function TvShowCard({ tvshow, action }) {
-    console.log(tvshow.production_countries)
     const classes = useStyles();
     const { favorites } = useContext(CustomContext);
     tvshow.favorite = !!favorites.find((id) => id === tvshow.id);

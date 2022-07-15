@@ -1,5 +1,5 @@
 import React from "react";
-import {ArrowBackIcon, ArrowForwardIcon} from "@material-ui/icons";
+import { ArrowBack, ArrowForward } from "@material-ui/icons";
 import {IconButton, Typography, Paper, makeStyles} from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 
@@ -16,21 +16,21 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const TemplateHeader = ({obj, history}) => {
+const TemplateHeader = ({obj, history, type}) => {
     const classes = useStyles();
 
     return (
         <Paper component="div" className={classes.root}>
             <IconButton aria-label="go back" onClick={() => history.goBack()} >
-                <ArrowBackIcon color="primary" fontSize="large" />
+                <ArrowBack color="primary" fontSize="large" />
             </IconButton>
 
             <Typography variant="h4" component="h3">
-                {obj.title}
+                {type === "movie" ? obj.title : obj.name }
                 <br />
             </Typography>
             <IconButton aria-label="go forward" onClick={() => history.goForward() } >
-                <ArrowForwardIcon color="primary" fontSize="large" />
+                <ArrowForward color="primary" fontSize="large" />
             </IconButton>
         </Paper>
     );

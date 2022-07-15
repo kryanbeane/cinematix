@@ -1,5 +1,5 @@
 import React from "react";
-import MovieHeader from "../headerMovie";
+import TemplateHeader from "../templateHeader";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import ImageList from "@material-ui/core/ImageList";
@@ -20,22 +20,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const TemplateMoviePage = ({ movie, children }) => {
+const TemplateMoviePage = ({ obj, children, type }) => {
     const classes = useStyles();
-    const { data , error, isLoading, isError } = useQuery(["images", { id: movie.id }, "movie"], getImages);
+    const { data , error, isLoading, isError } = useQuery(["images", { id: obj.id }, type], getImages);
 
-    if (isLoading) {
-        return <Spinner />;
-    }
-
-    if (isError) {
-        return <h1>{error.message}</h1>;
-    }
-    const images = data.posters
+    if (isLoading) return <Spinner />;
+    if (isError) return <h1>{error.message}</h1>;
+    let images;
+    type === "person" ? images = data.profiles : images= data.posters
 
     return (
         <>
-            <MovieHeader movie={movie} />
+            <TemplateHeader obj={obj} />
 
             <Grid container spacing={5} style={{ padding: "15px" }}>
                 <Grid item xs={3}>
