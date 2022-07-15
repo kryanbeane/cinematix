@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from "react";
+import React, {useEffect, useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,8 +8,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
-import { getMovieReviews } from "../../../api/tmdb-api";
-import { excerpt } from "../../../util";
+import {getMovieReviews} from "../../../api/tmdb-api";
+import {excerpt} from "../../../util";
 
 const useStyles = makeStyles({
   table: {
@@ -26,7 +26,7 @@ export default function MovieReviews({ movie }) {
       setReviews(reviews);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   return (
     <TableContainer component={Paper}>

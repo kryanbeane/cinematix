@@ -11,7 +11,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import img from '../../../images/pexels-dziana-hasanbekava-5480827.jpg';
-import { getMovieGenres } from "../../../api/tmdb-api";
+import { getGenres } from "../../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../../spinner';
 
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 const FilterMoviesCard = (props) => {
   const classes = useStyles();
-  const { data, error, isLoading, isError } = useQuery("genres", getMovieGenres);
+  const { data, error, isLoading, isError } = useQuery(["movieGenres", "movie"], getGenres);
 
   if (isLoading) {
     return <Spinner />;

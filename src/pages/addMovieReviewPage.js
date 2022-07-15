@@ -3,14 +3,14 @@ import PageTemplate from "../components/movies/templateMoviePage";
 import ReviewForm from "../components/reviewForm";
 import { withRouter } from "react-router-dom";
 import { useQuery } from "react-query";
-import { getMovie } from "../api/tmdb-api";
+import { getItem } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
 
 const WriteReviewPage = (props) => {
   const { movieId } = props.location.state;
   const { data: movie, error, isLoading, isError } = useQuery(
-    ["movie", { id: movieId }],
-    getMovie
+    ["movie", { id: movieId }, "movie"],
+      getItem
   );
 
   if (isLoading) {
